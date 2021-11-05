@@ -5,7 +5,7 @@
 
  /**
   * @file CE103-HW2-Lib.h
-  * @author Uður CORUH
+  * @author Ugur CORUH
   * @date 03 October 2021
   *
   * @brief <b> HW-2 Functions </b>
@@ -49,7 +49,7 @@ extern "C" {
 	 <!--
 
 		@startuml fnCE103HW2Lib.png
-
+	
 		title Servlet Container
 
 		(*) --> "ClickServlet.handleRequest()"

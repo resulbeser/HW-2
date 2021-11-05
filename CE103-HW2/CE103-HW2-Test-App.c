@@ -6,6 +6,8 @@ int main()
 {
 	printf("CE103 Algorithms and Programming I HW-2\n");
 
+	
+
 	getch();
 
 }
