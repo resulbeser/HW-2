@@ -146,10 +146,34 @@ int fnCE103HW2Lib(unsigned char* fia, int fib, char* fic)
 **/
 int ce103_fibonacciNumber(int fiIndex)
 {
-	//TODO:Start from Here...
-	return -1;
+	fiIndex = fiIndex - 1;                            
+	/*Ýntegers is defined*/
+	/*num1 = 0 because the fibonacci string starts at 0*/
+	int num1 = 0, num2 = 1, nextTerm = 0;  
+	/*if integer is less than or equal to 0*/
+	/*function returns 0 if index is less than 1*/
+	int returnNumber;                                 
+    if (fiIndex <= 0)                                 
+	{                 
+		return 0;                                    
+	} 
+	/*The reason for using a "for" loop is because it's repetitive functions.*/
+	 /*If "i=1" and "i<= fiIndex" the following is done.*/
+    for (int i = 1; i <= fiIndex; ++i)                
+	{                                                
+		num1 = num2;                                  
+		num2 = nextTerm;
+		nextTerm = num1 + num2;
+		returnNumber = nextTerm;
+		/*returnnumber or if the nextTerm is less than 0*/
+		if (returnNumber < 0)                         
+		{   
+		/*function will return -2*/
+			return -2;                                
+		}
+	}
+	return returnNumber;
 }
-
 /**
 	@name   strrev (ce103_strrev)
 
@@ -163,10 +187,21 @@ int ce103_fibonacciNumber(int fiIndex)
 **/
 char* ce103_strrev(char* fiStr)
 {
-	//TODO:Start from Here...
-	return 0;
+	/*Character named temp is defined.*/
+	char temp;   
+	/*x, y and n variables are defined.*/
+	int x, y, n;                               
+	n = ce103_strlen(fiStr);  
+	/*The initial values of the xand y variables are given.The loop runs as long as x<y.*/
+	/*"++x" increments x by 1, "--y" decrements y by 1, then the loop runs.*/
+	for (x = 0, y = n - 1; x < y; ++x, --y) {   
+		temp = fiStr[y];                         
+		fiStr[y] = fiStr[x];                     
+		fiStr[x] = temp;                         
+	}
+	/*The return value of the function*/
+    return fiStr;                              
 }
-
 /**
 	@name   strlen (ce103_strlen)
 	@brief \b Get string length
@@ -188,8 +223,15 @@ char* ce103_strrev(char* fiStr)
 **/
 int ce103_strlen(const char* fiStr)
 {
-	//TODO:Start from Here...
-	return -1;
+	/*The initial value of the variable is given as 1.*/
+	int i = 0; 
+	/*fiStr non-zero condition.*/
+	/*increments the variable value by one by.*/
+	while (fiStr[i] != '\0') {          
+		i++;                            
+	}           
+	/*With "return" the control is returned to the calling function*/
+	return i;                           
 }
 
 /**
@@ -214,10 +256,21 @@ int ce103_strlen(const char* fiStr)
 **/
 char* ce103_strcat(char* fiDest, char* fiSrc)
 {
-	//TODO:Start from Here...
-	return 0;
+	/*The variables i and j are defined.*/
+	int i = ce103_strlen(fiDest), j = 0;  
+	/*fiSrc non-zero condition.*/
+	/*i and j are incremented by 1*/
+    while (fiSrc[j] != '\0')                   
+	{
+		fiDest[i] = fiSrc[j];
+		i++;                                   
+		j++;                                   
+	}
+    fiDest[i] = '\0';   
+	/*declaring the end of the string*/
+	return fiDest;
 }
-
+	
 /**
 	@name   strcmp (ce103_strcmp)
 	@brief  \b Compare two strings
@@ -241,10 +294,23 @@ char* ce103_strcat(char* fiDest, char* fiSrc)
 **/
 int ce103_strcmp(const char* fiLhs, const char* fiRhs)
 {
-	//TODO:Start from Here...
-	return -2;
+	/*The initial value of variable c is given as 0.*/
+	int c = 0;   
+	/*The fiLhs and fiRhs characters are conditional. The while loop compares two strings here.*/
+	/*If the characters in the function are both 0 and equal to each other, the function will work.*/
+    while (fiLhs[c] == fiRhs[c]) {   
+     /*function fiLhs equals "null"*/
+	/*Thanks to "NULL" our current directory does not go to infinity.*/
+		if (fiLhs[c] == '\0' || fiRhs[c] == '\0')                 
+			break;                                             
+		c++;
+	}
+    if (fiLhs[c] == '\0' && fiRhs[c] == '\0')                     
+	/*The return value of the function is 0 or -1.*/
+		return 0;                                                 
+	else
+		return -1;
 }
-
 /**
 *
 	@name  strcpy (ce103_strcpy)
@@ -267,10 +333,20 @@ int ce103_strcmp(const char* fiLhs, const char* fiRhs)
 **/
 char* ce103_strcpy(char* foDestination, const char* fiSource)
 {
-	//TODO:Start from Here...
-	return 0;
+	char* start = foDestination;
+	/*fiSource equal to NULL*/
+	/*if pointer "fiSource" is not equal to variable 0*/
+	/*The pointer we send to "foDestination" and the pointer we send to "fiSource" are synchronized with the code defined in the while loop.*/
+    while (*fiSource != '\0')                     
+	{
+		*foDestination = *fiSource;              
+		foDestination++;
+		fiSource++;
+	}
+	/*add '\0' at the end*/
+	*foDestination = '\0';                       
+	return start;
 }
-
 /**
  * @name    hex2bin (ce103_hex2bin)
  * @brief   \b Hexadecimal to Binary (BCD)  Conversion
@@ -286,9 +362,24 @@ char* ce103_strcpy(char* foDestination, const char* fiSource)
  */
 void ce103_hex2bin(char* fiHex, int fiHexLen, unsigned char* foBin)
 {
-	//TODO:Start from Here...
-}
+	/*two variables defined in one line*/
+	int x, y;  
 
+	for (;;) {
+		x = *fiHex++; if (x == 0) break;
+		/*If length of the input string is less than the fiHexLen,remaining bytes is not filled.*/
+		if (x > 96) x -= 87;
+		else if (x > 64) x -= 55;
+		else x -= 48;
+		y = *fiHex++; if (y == 0) { *foBin = x << 4; break; }
+		/*If odd number of characters processed, last nibble is padded with 0*/
+		if (y > 96) y -= 87;
+		else if (y > 64) y -= 55;
+		else y -= 48;
+		*foBin++ = (x << 4) | y;
+	}
+	return fiHex;
+}
 /**
 * @name    bin2hex (ce103_bin2hex)
 * @brief   \b Binary (BCD) to Hexadecimal Conversion
@@ -300,7 +391,24 @@ void ce103_hex2bin(char* fiHex, int fiHexLen, unsigned char* foBin)
 * @param [out] foHex      [\b char*]			 Convertion result as ascii. Doubles the binary length.
 *
 */
-void ce103_bin2hex(unsigned char* fiBin, int fiBinLen, char* foHex)
-{
-	//TODO:Start from Here...
-}
+	void ce103_bin2hex(unsigned char* fiBin, int fiBinLen, char* foHex)
+
+	{
+		int x, y, * end = fiBin + fiBinLen;
+		/*We set our condition for fibin < end.*/
+		while (fiBin < end) {
+			x = *(fiBin++);
+			y = x >> 4;
+			*(foHex++) = y + (y > 9 ? 55 : 48);
+			y = x & 15;
+			*(foHex++) = y + (y > 9 ? 55 : 48);
+		}
+		*foHex = 0;
+
+		return fiBin;
+	}
+
+	
+	
+	
+	
